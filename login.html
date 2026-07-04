@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #101014;
+    --card: #17171d;
+    --card-border: #26262f;
+    --field: #1d1d25;
+    --field-border: #2e2e39;
+    --field-border-focus: #8b5cf6;
+    --text: #f2f1f7;
+    --text-dim: #9797a6;
+    --accent-a: #7c3aed;
+    --accent-b: #c026d3;
+    --error: #f16a6a;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(124,58,237,0.14), transparent 45%),
+      radial-gradient(circle at 85% 90%, rgba(192,38,211,0.10), transparent 45%),
+      var(--bg);
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    padding: 32px 16px;
+  }
+
+  .wrap{
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .eyebrow{
+    text-align:center;
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+  }
+
+  .card{
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 36px 32px 30px;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+
+  .logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    padding: 16px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.16), rgba(192,38,211,0.10));
+    border: 1px solid rgba(124,58,237,0.25);
+    margin-bottom: 28px;
+  }
+
+  .logo .mark{
+    width: 26px; height: 26px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, var(--accent-a), var(--accent-b));
+    flex-shrink:0;
+  }
+
+  .logo span{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 4px;
+    text-align:center;
+  }
+
+  .sub{
+    text-align:center;
+    color: var(--text-dim);
+    font-size: 13.5px;
+    margin: 0 0 28px;
+  }
+
+  form{ display:flex; flex-direction:column; gap: 18px; }
+
+  .field label{
+    display:block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dim);
+    margin-bottom: 7px;
+  }
+
+  .field input{
+    width:100%;
+    padding: 12px 14px;
+    background: var(--field);
+    border: 1px solid var(--field-border);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 14.5px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+
+  .field input::placeholder{ color: #55555f; }
+
+  .field input:focus{
+    border-color: var(--field-border-focus);
+    box-shadow: 0 0 0 3px rgba(139,92,246,0.18);
+  }
+
+  .row-between{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: -6px;
+  }
+
+  .row-between label{
+    display:flex; align-items:center; gap:6px; cursor:pointer;
+  }
+
+  .row-between a{
+    color: #c9a8ff;
+    text-decoration: none;
+  }
+  .row-between a:hover{ text-decoration: underline; }
+
+  .error-text{
+    font-size: 12.5px;
+    color: var(--error);
+    margin-top: -10px;
+    min-height: 1px;
+  }
+
+  button.submit{
+    margin-top: 6px;
+    padding: 13px 16px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent-a), var(--accent-b));
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 14.5px;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: filter .15s ease, transform .05s ease;
+  }
+
+  button.submit:hover{ filter: brightness(1.08); }
+  button.submit:active{ transform: translateY(1px); }
+
+  button.submit:focus-visible,
+  .field input:focus-visible,
+  .row-between input[type="checkbox"]:focus-visible{
+    outline: 2px solid #c9a8ff;
+    outline-offset: 2px;
+  }
+
+  .footer-text{
+    text-align:center;
+    margin-top: 22px;
+    font-size: 13.5px;
+    color: var(--text-dim);
+  }
+
+  .footer-text a{
+    color: #c9a8ff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .footer-text a:hover{ text-decoration: underline; }
+
+  @media (max-width: 380px){
+    .card{ padding: 28px 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+    <div class="eyebrow">Sign In</div>
+    <div class="card">
+      <div class="logo">
+        <div class="mark"></div>
+        <span>App / Web Logo</span>
+      </div>
+
+      <h1>Welcome back</h1>
+      <p class="sub">Sign in to continue to your account</p>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="loginId">Login ID / Email</label>
+          <input type="text" id="loginId" name="loginId" placeholder="you@example.com" autocomplete="username" required>
+          <div class="error-text" id="loginIdError"></div>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+          <div class="error-text" id="passwordError"></div>
+        </div>
+
+        <div class="row-between">
+          <label><input type="checkbox" id="remember"> Remember me</label>
+          <a href="#">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="submit">Sign In</button>
+      </form>
+
+      <p class="footer-text">First time logging in with a temporary password? You'll be asked to set a new one after signing in.</p>
+    </div>
+  </div>
+
+<script>
+  document.getElementById('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    let valid = true;
+
+    const loginId = document.getElementById('loginId');
+    const password = document.getElementById('password');
+    const loginIdError = document.getElementById('loginIdError');
+    const passwordError = document.getElementById('passwordError');
+
+    loginIdError.textContent = '';
+    passwordError.textContent = '';
+
+    if(!loginId.value.trim()){
+      loginIdError.textContent = 'Enter your login ID or email.';
+      valid = false;
+    }
+    if(!password.value){
+      passwordError.textContent = 'Enter your password.';
+      valid = false;
+    }
+
+    if(valid){
+      // Hook up real authentication here.
+      alert('Signed in (demo only — connect this to your backend).');
+    }
+  });
+</script>
+
+</body>
+</html>
